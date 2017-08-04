@@ -43,27 +43,27 @@ function daBears(){
 // Which function(s) access the "chair" variable and get "Too Big!"
 // (Delete wrong answers, leave correct ones)
 
-var fairyTale1 = ["daBears", "papaBear", "mamaBear", "babyBear", "goldilocks"];
+var fairyTale1 = ["papaBear", "mamaBear"];
 
 // Which function(s) access the "feeling" variable and get "Hungry"
 // (Delete wrong answers, leave correct ones)
 
-var fairyTale2 = ["daBears", "papaBear", "mamaBear", "babyBear", "goldilocks"];
+var fairyTale2 = ["goldilocks"];
 
 // Which function(s) access the "porridge" variable and get "Too Cold!"
 // (Delete wrong answers, leave correct ones)
 
-var fairyTale3 = ["daBears", "papaBear", "mamaBear", "babyBear", "goldilocks"];
+var fairyTale3 = ["mamaBear"];
 
 // Which function(s) access the "sleepy" variable and get undefined
 // (Delete wrong answers, leave correct ones)
 
-var fairyTale4 = ["daBears", "papaBear", "mamaBear", "babyBear", "goldilocks"];
+var fairyTale4 = ["daBears", "papaBear", "mamaBear", "goldilocks"];
 
 // Which function(s) access the isFurry variable and get true
 // (Delete wrong answers, leave correct ones)
 
-var fairyTale5 = ["daBears", "papaBear", "mamaBear", "babyBear", "goldilocks"];
+var fairyTale5 = ["daBears", "papaBear", "mamaBear", "babyBear"];
 
 
 // *************
@@ -81,7 +81,22 @@ var fairyTale5 = ["daBears", "papaBear", "mamaBear", "babyBear", "goldilocks"];
 // the other called "mustang".  Using implicit context, invoke the drive method on
 // "charger" once, and invoke it twice on "mustang".
 
-// CODE HERE...
+function Vehicle() {
+  this.gasRemaining = 100;
+  
+}
+
+Vehicle.prototype.drive = function() {
+    this.gasRemaining -= 25;
+};
+
+let mustang = new Vehicle();
+let charger = new Vehicle();
+charger.drive();
+mustang.drive();
+mustang.drive();
+
+
 
 
 
@@ -105,9 +120,31 @@ var fairyTale5 = ["daBears", "papaBear", "mamaBear", "babyBear", "goldilocks"];
 // and should neither modify them nor break when encountering them.
 
 
-
-
-// CODE HERE...
+String.prototype.grammarPolice = function() {
+    var splits = this.split(' ');
+    for (let i = 0; i < splits.length; i++) {
+      let newWord = ''
+      for(let j = 0; j < splits[i].length; j++){
+        //if it's a letter
+        if(/([A-Z]|[a-z])/g.test(splits[i][j])) {
+          if(j === 0) {
+            //add the first letter in uppercase
+            newWord += splits[i][j].toUpperCase();
+          } else {
+            //if it's not first letter, add it lowercase
+            newWord += splits[i][j].toLowerCase();
+          }
+          // console.log(splits[i], 'j was ', splits[i][j]);
+        } else {
+          //if it's not a letter, just add it
+          newWord += splits[i][j];
+        }
+      }
+      //replace the old version with the new word
+      splits[i] = newWord;
+    }
+  return splits.join(' ');
+}
 
 
 
@@ -121,11 +158,21 @@ var fairyTale5 = ["daBears", "papaBear", "mamaBear", "babyBear", "goldilocks"];
 
 // If the arguments are of the same type and have the same value, return "Exactly the same"
 
-// If the arguments have the same value but are of different types, return "Same value, different types"
+// If the arguments have the same value but are of different types, return 
+//"Same value, different types"
 
 // In all other cases, return "Different values"
 
-// CODE HERE...
+function valueType(a, b) {
+
+  if( a === b) {
+    return 'Exactly the same';
+  } else if (a == b) {
+    return 'Same value, different types';
+  } else {
+    return 'Different values';
+  }
+}
 
 
 
@@ -140,4 +187,8 @@ var fairyTale5 = ["daBears", "papaBear", "mamaBear", "babyBear", "goldilocks"];
 
 var theAnswer = "Unknown";
 
-// CODE HERE...
+function promiseCatcher(promise) {
+  promise.then((response) => {
+    theAnswer = response;
+  })
+}

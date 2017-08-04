@@ -12,7 +12,15 @@
 // with the animal as the context, and 'Trogdor' as a parameter.
 // return the result of your updateAnimal invocation
 
-// CODE HERE...
+function callBinding(magicAnimals, updateAnimal, id) {
+    let fantasticBeast;
+    for (i = 0; i < magicAnimals.length; i++) {
+        if (magicAnimals[i].id === id) {
+            fantasticBeast = magicAnimals[i];
+        }
+    }
+    return updateAnimal.call(fantasticBeast, 'Trogdor');
+}
 
 
 
@@ -22,12 +30,22 @@
 
 // For this question, you are asked to make a function called 'applyBinding'.
 // This function will take in 3 parameters:
-// magicAnimals (Array), updateAnimal (Function), id (Number).
+// magicAnimals (Array), updateAnimal (Function), id (Number). 
 // Find the animal that matches the given id, then call the function
 // with the context of the animal, and the array ['being majestic', 'eating rainbows'] as a parameter.
 // return the result of your updateAnimal invocation
-
-// CODE HERE...
+var timesCalled = 0;
+function applyBinding(magicAnimals, updateAnimal, id) {
+    let fantasticBeast;
+    for (i = 0; i < magicAnimals.length; i++) {
+        if (magicAnimals[i].id === id) {
+            fantasticBeast = magicAnimals[i];
+        }
+    }
+    let x = updateAnimal.apply(fantasticBeast, ['being majestic', 'eating rainbows']);
+    timesCalled++;
+    return x;
+}
 
 
 
@@ -47,7 +65,18 @@
 
 var foo;
 
-// CODE HERE...
+function promiseMe($q) {
+
+    var deferred = $q.defer();
+
+    
+    setTimeout(function() {
+        foo = 'bar';
+        deferred.resolve(foo);
+    }, 20)
+
+    return deferred.promise;
+}
 
 
 
@@ -60,7 +89,31 @@ var foo;
 // $q (Custom promise object), $http (Custom request function).
 // NOTE: $http is a function created to simulate the angular $http.
 // Set up your custom promise, then make a GET request using $http to '/api/users'.
-// Make an array of emails (array of strings) from the returned data (You will need to console log or debug to figure this out),
+// Make an array of emails (array of strings) from the returned data (You will need 
+    //to console log or debug to figure this out),
 // and then resolve the array as you complete your promise.
 
 // CODE HERE...
+var emails;
+
+function emailList($q, $http) {
+    var deferred = $q.defer();
+
+    $http({
+        method: 'GET',
+        url: '/api/users'
+    }).then(function successCallback(response) {
+        for (i = 0; i < response.data.length; i++) {
+            emails.push(response.data[i].email);
+        }
+        // console.log(emails);
+    }, function errorCallback(response) {
+        alert('Winter is HERE');
+    })
+
+    deferred.resolve(emails);
+
+    return deferred.promise;
+
+
+}
